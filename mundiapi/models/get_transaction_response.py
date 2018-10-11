@@ -633,6 +633,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
         paid_at (datetime): TODO: type description here.
         paid_amount (string): TODO: type description here.
         mtype (string): TODO: type description here.
+        credit_at (datetime): TODO: type description here.
 
     """
 
@@ -664,6 +665,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
         "gateway_response":'gateway_response',
         "due_at":'due_at',
         "paid_at":'paid_at',
+        "credit_at":'credit_at',
         "next_attempt":'next_attempt',
         "transaction_type":'transaction_type'
     }
@@ -695,6 +697,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
                  gateway_response=None,
                  due_at=None,
                  paid_at=None,
+                 credit_at=None,
                  next_attempt=None,
                  transaction_type=None):
         """Constructor for the GetBoletoTransactionResponse class"""
@@ -715,6 +718,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
         self.paid_at = APIHelper.RFC3339DateTime(paid_at) if paid_at else None
         self.paid_amount = paid_amount
         self.mtype = mtype
+        self.credit_at = APIHelper.RFC3339DateTime(credit_at) if credit_at else None
 
         # Call the constructor for the base class
         super(GetBoletoTransactionResponse, self).__init__(gateway_id,
@@ -780,6 +784,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
         gateway_response = mundiapi.models.get_gateway_response_response.GetGatewayResponseResponse.from_dictionary(dictionary.get('gateway_response')) if dictionary.get('gateway_response') else None
         due_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("due_at")).datetime if dictionary.get("due_at") else None
         paid_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("paid_at")).datetime if dictionary.get("paid_at") else None
+        credit_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("credit_at")).datetime if dictionary.get("credit_at") else None
         next_attempt = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_attempt")).datetime if dictionary.get("next_attempt") else None
         transaction_type = dictionary.get('transaction_type')
 
@@ -810,6 +815,7 @@ class GetBoletoTransactionResponse(GetTransactionResponse):
                    gateway_response,
                    due_at,
                    paid_at,
+                   credit_at,
                    next_attempt,
                    transaction_type)
 
